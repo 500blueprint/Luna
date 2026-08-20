@@ -1,18 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <style>
 
-/* LUNA AREA */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: transparent;
+}
+
+
+/* =========================
+   LUNA AREA
+========================= */
+
 #luna-zone {
     position: fixed;
     inset: 0;
+
     width: 100vw;
     height: 100vh;
 
-    z-index: 999999;
     pointer-events: none;
 }
 
 
-/* LUNA */
+/* =========================
+   LUNA
+========================= */
+
 #luna {
     position: absolute;
 
@@ -32,36 +55,96 @@
         drop-shadow(0 7px 12px rgba(0,0,0,.30))
         drop-shadow(0 0 15px rgba(160,80,255,.65));
 
-    /*
-       scaleX(-1) FLIPS LUNA
-       so she faces RIGHT
-    */
-
     animation:
         lunaCrossScreen 7s ease-in-out forwards,
         lunaPlay 3s ease-in-out 7s infinite;
 }
 
 
-/* ========================================
-   LUNA CROSSES LEFT ---> RIGHT
-======================================== */
+/* =========================
+   SPEECH BUBBLE
+========================= */
+
+#luna-speech {
+    position: absolute;
+
+    right: 260px;
+    bottom: 250px;
+
+    width: 220px;
+
+    padding: 15px 18px;
+
+    border-radius: 20px;
+
+    background: white;
+    color: #27103f;
+
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    text-align: center;
+
+    box-shadow:
+        0 5px 18px rgba(0,0,0,.25),
+        0 0 18px rgba(165,90,255,.6);
+
+    opacity: 0;
+
+    animation:
+        showLunaSpeech .5s ease 7.5s forwards;
+
+    pointer-events: none;
+}
+
+
+#luna-speech::after {
+    content: "";
+
+    position: absolute;
+
+    right: 30px;
+    bottom: -17px;
+
+    border-width: 18px 12px 0 12px;
+    border-style: solid;
+
+    border-color:
+        white
+        transparent
+        transparent
+        transparent;
+}
+
+
+@keyframes showLunaSpeech {
+
+    from {
+        opacity: 0;
+        transform: translateY(15px) scale(.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+
+/* =========================
+   CROSS SCREEN
+========================= */
 
 @keyframes lunaCrossScreen {
 
-    /* starts off screen LEFT */
     0% {
         opacity: 0;
 
         transform:
             translateX(-400px)
-            translateY(0)
-            scaleX(-1)
-            rotate(0deg);
+            scaleX(-1);
     }
 
-
-    /* enters screen */
     10% {
         opacity: 1;
 
@@ -72,8 +155,6 @@
             rotate(2deg);
     }
 
-
-    /* little playful hop */
     25% {
         transform:
             translateX(20vw)
@@ -81,7 +162,6 @@
             scaleX(-1)
             rotate(-3deg);
     }
-
 
     40% {
         transform:
@@ -91,8 +171,6 @@
             rotate(2deg);
     }
 
-
-    /* another little pounce */
     55% {
         transform:
             translateX(52vw)
@@ -100,7 +178,6 @@
             scaleX(-1)
             rotate(-4deg);
     }
-
 
     70% {
         transform:
@@ -110,8 +187,6 @@
             rotate(3deg);
     }
 
-
-    /* approaches right side */
     85% {
         transform:
             translateX(calc(100vw - 390px))
@@ -120,70 +195,50 @@
             rotate(-2deg);
     }
 
-
-    /* settles on RIGHT */
     100% {
         opacity: 1;
 
         transform:
             translateX(calc(100vw - 370px))
             translateY(0)
-            scaleX(-1)
-            rotate(0deg);
+            scaleX(-1);
     }
 }
 
 
-/* ========================================
-   PLAY AFTER SHE REACHES RIGHT
-======================================== */
+/* =========================
+   PLAY
+========================= */
 
 @keyframes lunaPlay {
 
-    0%, 100% {
+    0%,100% {
+
         transform:
             translateX(calc(100vw - 370px))
             translateY(0)
-            scaleX(-1)
-            rotate(0deg);
+            scaleX(-1);
     }
-
-
-    25% {
-        transform:
-            translateX(calc(100vw - 385px))
-            translateY(-12px)
-            scaleX(-1)
-            rotate(2deg);
-    }
-
 
     50% {
+
         transform:
-            translateX(calc(100vw - 405px))
-            translateY(-25px)
+            translateX(calc(100vw - 400px))
+            translateY(-20px)
             scaleX(-1)
             rotate(-3deg);
-    }
-
-
-    75% {
-        transform:
-            translateX(calc(100vw - 380px))
-            translateY(-8px)
-            scaleX(-1)
-            rotate(2deg);
     }
 }
 
 
-/* ========================================
+/* =========================
    MOBILE
-======================================== */
+========================= */
 
-@media (max-width: 600px) {
+@media(max-width:600px) {
 
     #luna {
+
         width: 190px;
 
         animation:
@@ -192,9 +247,26 @@
     }
 
 
+    #luna-speech {
+
+        width: 155px;
+
+        right: 125px;
+        bottom: 165px;
+
+        font-size: 13px;
+
+        padding: 11px 13px;
+
+        animation:
+            showLunaSpeech .5s ease 6.5s forwards;
+    }
+
+
     @keyframes lunaCrossMobile {
 
         0% {
+
             opacity: 0;
 
             transform:
@@ -202,84 +274,95 @@
                 scaleX(-1);
         }
 
-
         10% {
+
             opacity: 1;
 
             transform:
                 translateX(-10px)
-                translateY(-5px)
                 scaleX(-1);
         }
 
-
         35% {
+
             transform:
                 translateX(30vw)
                 translateY(-25px)
-                scaleX(-1)
-                rotate(-3deg);
-        }
-
-
-        60% {
-            transform:
-                translateX(55vw)
-                translateY(0)
-                scaleX(-1)
-                rotate(3deg);
-        }
-
-
-        80% {
-            transform:
-                translateX(calc(100vw - 210px))
-                translateY(-20px)
                 scaleX(-1);
         }
 
+        60% {
+
+            transform:
+                translateX(55vw)
+                scaleX(-1);
+        }
 
         100% {
+
             opacity: 1;
 
             transform:
                 translateX(calc(100vw - 195px))
-                translateY(0)
                 scaleX(-1);
         }
+
     }
 
 
     @keyframes lunaPlayMobile {
 
-        0%, 100% {
+        0%,100% {
+
             transform:
                 translateX(calc(100vw - 195px))
-                translateY(0)
                 scaleX(-1);
         }
 
-
         50% {
+
             transform:
                 translateX(calc(100vw - 215px))
                 translateY(-15px)
-                scaleX(-1)
-                rotate(-3deg);
+                scaleX(-1);
         }
+
     }
 
 }
 
 </style>
+</head>
+
+
+<body>
 
 
 <div id="luna-zone">
+
+
+    <!-- SPEECH -->
+
+    <div id="luna-speech">
+        ✨ Psst! Click me to check out Luna's Freebies! 🌙
+    </div>
+
+
+    <!-- LUNA -->
 
     <img
         id="luna"
         src="./Luna.PNG"
         alt="Luna"
+        onclick="window.open(
+        'https://payhip.com/MoonlightDesigns87/collection/luna-s-freebies',
+        '_top'
+        )"
     >
 
+
 </div>
+
+
+</body>
+</html>
