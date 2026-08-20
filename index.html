@@ -1,181 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Luna's Freebies</title>
-
 <style>
 
-/* ==============================
-   PAGE
-============================== */
-
-html, body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    min-height: 100%;
-    background: transparent;
-    overflow-x: hidden;
-}
-
-
-/* ==============================
-   MAGIC LAYER
-============================== */
-
-#freebie-magic {
-    position: fixed;
-    inset: 0;
-    width: 100vw;
-    height: 100vh;
-    pointer-events: none;
-    overflow: hidden;
-    z-index: 9000;
-}
-
-
-/* ==============================
-   TWINKLING LIGHTS
-============================== */
-
-.twinkle {
-    position: absolute;
-    width: var(--size);
-    height: var(--size);
-    border-radius: 50%;
-    background: white;
-
-    box-shadow:
-        0 0 5px white,
-        0 0 12px #e5c9ff,
-        0 0 22px #a85cff;
-
-    animation:
-        twinkle 2s ease-in-out forwards;
-}
-
-.twinkle::before,
-.twinkle::after {
-    content: "";
-    position: absolute;
-    background: rgba(255,255,255,.9);
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-}
-
-.twinkle::before {
-    width: calc(var(--size) * 5);
-    height: 1px;
-}
-
-.twinkle::after {
-    width: 1px;
-    height: calc(var(--size) * 5);
-}
-
-@keyframes twinkle {
-
-    0% {
-        opacity: 0;
-        transform: scale(.2);
-    }
-
-    35% {
-        opacity: 1;
-        transform: scale(1.5) rotate(45deg);
-    }
-
-    65% {
-        opacity: .4;
-        transform: scale(.7) rotate(90deg);
-    }
-
-    100% {
-        opacity: 0;
-        transform: scale(.1) rotate(180deg);
-    }
-}
-
-
-/* ==============================
-   FLOATING PAW PRINTS
-============================== */
-
-.paw {
-    position: absolute;
-    bottom: -40px;
-    color: #d9b4ff;
-    font-size: var(--size);
-
-    filter:
-        drop-shadow(0 0 5px white)
-        drop-shadow(0 0 12px #9d5cff);
-
-    opacity: 0;
-
-    animation:
-        pawFloat var(--speed) linear forwards;
-}
-
-@keyframes pawFloat {
-
-    0% {
-        opacity: 0;
-        transform:
-            translateY(20px)
-            rotate(-15deg);
-    }
-
-    15% {
-        opacity: .75;
-    }
-
-    50% {
-        transform:
-            translate(30px,-50vh)
-            rotate(10deg);
-    }
-
-    100% {
-        opacity: 0;
-        transform:
-            translate(-20px,-110vh)
-            rotate(-15deg);
-    }
-}
-
-
-/* ==============================
-   LUNA AREA
-============================== */
-
+/* LUNA AREA — RIGHT SIDE */
 #luna-zone {
     position: fixed;
-
-    left: 5px;
+    right: 5px;
     bottom: 5px;
 
     width: 380px;
-    height: 310px;
+    height: 330px;
 
     z-index: 999999;
-
     pointer-events: none;
 }
 
 
-/* ==============================
-   LUNA
-============================== */
-
+/* LUNA — FLIPPED TO FACE RIGHT */
 #luna {
     position: absolute;
 
-    left: 0;
+    right: 0;
     bottom: 0;
 
     width: 350px;
@@ -190,28 +33,29 @@ html, body {
     -webkit-user-drag: none;
 
     filter:
-        drop-shadow(0 7px 12px rgba(0,0,0,.3))
+        drop-shadow(0 7px 12px rgba(0,0,0,.30))
         drop-shadow(0 0 15px rgba(160,80,255,.65));
 
     animation:
-        lunaSneakIn 3s ease-out forwards,
+        lunaComeIn 3s ease-out forwards,
         lunaPlay 4s ease-in-out 3s infinite;
 }
 
 
-/* ==============================
-   LUNA SNEAKS IN
-============================== */
+/* =====================================
+   ENTER FROM RIGHT + FACE RIGHT
+===================================== */
 
-@keyframes lunaSneakIn {
+@keyframes lunaComeIn {
 
     0% {
         opacity: 0;
 
         transform:
-            translateX(-110vw)
-            rotate(-8deg)
-            scale(.6);
+            translateX(110vw)
+            rotate(-5deg)
+            scale(.65)
+            scaleX(-1);
     }
 
     20% {
@@ -220,80 +64,82 @@ html, body {
 
     55% {
         transform:
-            translateX(-100px)
-            translateY(-15px)
-            rotate(5deg)
-            scale(.9);
+            translateX(100px)
+            translateY(-10px)
+            rotate(4deg)
+            scale(.90)
+            scaleX(-1);
     }
 
     75% {
         transform:
-            translateX(20px)
-            translateY(-25px)
-            rotate(-4deg)
-            scale(1.05);
+            translateX(-25px)
+            translateY(-20px)
+            rotate(-3deg)
+            scale(1.05)
+            scaleX(-1);
     }
 
     90% {
         transform:
-            translateX(-8px)
+            translateX(8px)
             rotate(2deg)
-            scale(.98);
+            scale(.98)
+            scaleX(-1);
     }
 
     100% {
         opacity: 1;
 
         transform:
-            translate(0,0)
-            rotate(0)
-            scale(1);
+            translateX(0)
+            translateY(0)
+            rotate(0deg)
+            scale(1)
+            scaleX(-1);
     }
 }
 
 
-/* ==============================
-   LUNA PLAYS
-============================== */
+/* =====================================
+   PLAYING AFTER SHE ARRIVES
+===================================== */
 
 @keyframes lunaPlay {
 
     0%, 100% {
         transform:
             translate(0,0)
-            rotate(-1deg);
+            rotate(0deg)
+            scaleX(-1);
     }
 
-    20% {
+    25% {
         transform:
-            translate(8px,-5px)
-            rotate(2deg);
+            translate(-10px,-8px)
+            rotate(2deg)
+            scaleX(-1);
     }
 
-    40% {
+    50% {
         transform:
-            translate(25px,-18px)
+            translate(-30px,-18px)
             rotate(-3deg)
-            scale(1.02);
+            scaleX(-1);
     }
 
-    60% {
+    75% {
         transform:
-            translate(40px,-5px)
-            rotate(3deg);
-    }
-
-    80% {
-        transform:
-            translate(10px,-15px)
-            rotate(-2deg);
+            translate(-12px,-8px)
+            rotate(2deg)
+            scaleX(-1);
     }
 }
 
 
-/* ==============================
-   LUNA POUNCE
-============================== */
+/* =====================================
+   CLICK LUNA — POUNCE
+===================================== */
 
 #luna.pounce {
     opacity: 1;
@@ -303,213 +149,57 @@ html, body {
         lunaPlay 4s ease-in-out .8s infinite;
 }
 
+
 @keyframes lunaPounce {
 
     0% {
         transform:
             translate(0,0)
-            scale(1);
+            scale(1)
+            scaleX(-1);
     }
 
     30% {
         transform:
-            translate(55px,-45px)
-            rotate(7deg)
-            scale(1.1);
+            translate(-60px,-45px)
+            rotate(-6deg)
+            scale(1.10)
+            scaleX(-1);
     }
 
     55% {
         transform:
-            translate(80px,-5px)
-            rotate(-5deg)
-            scale(1.04);
+            translate(-85px,-5px)
+            rotate(5deg)
+            scale(1.05)
+            scaleX(-1);
     }
 
     80% {
         transform:
-            translate(15px,-15px)
-            rotate(3deg);
+            translate(-20px,-15px)
+            rotate(-3deg)
+            scaleX(-1);
     }
 
     100% {
         transform:
             translate(0,0)
-            scale(1);
+            scale(1)
+            scaleX(-1);
     }
 }
 
 
-/* ==============================
-   GLOWING PLAY ORB
-============================== */
-
-#play-orb {
-    position: absolute;
-
-    left: 280px;
-    bottom: 75px;
-
-    width: 20px;
-    height: 20px;
-
-    border-radius: 50%;
-
-    background: white;
-
-    pointer-events: none;
-
-    box-shadow:
-        0 0 8px white,
-        0 0 18px #e3c3ff,
-        0 0 32px #a55cff,
-        0 0 50px #7e38d8;
-
-    animation:
-        orbPlay 3s ease-in-out infinite;
-}
-
-@keyframes orbPlay {
-
-    0%, 100% {
-        transform:
-            translate(0,0)
-            scale(.8);
-    }
-
-    25% {
-        transform:
-            translate(25px,-45px)
-            scale(1.2);
-    }
-
-    50% {
-        transform:
-            translate(-20px,-70px)
-            scale(.9);
-    }
-
-    75% {
-        transform:
-            translate(35px,-20px)
-            scale(1.15);
-    }
-}
-
-
-/* ==============================
-   SPEECH BUBBLE
-============================== */
-
-#luna-bubble {
-    position: absolute;
-
-    left: 185px;
-    bottom: 230px;
-
-    width: 220px;
-
-    padding: 14px;
-
-    box-sizing: border-box;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ffffff,
-            #f5eaff
-        );
-
-    color: #35155d;
-
-    border: 3px solid #9557e8;
-
-    border-radius: 22px;
-
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    font-weight: 800;
-
-    text-align: center;
-    line-height: 1.3;
-
-    box-shadow:
-        0 6px 20px rgba(0,0,0,.2),
-        0 0 18px rgba(160,75,255,.45);
-
-    opacity: 0;
-
-    transform:
-        translateY(10px)
-        scale(.7);
-
-    transition:
-        opacity .3s ease,
-        transform .3s ease;
-
-    pointer-events: none;
-}
-
-#luna-bubble.show {
-    opacity: 1;
-
-    transform:
-        translateY(0)
-        scale(1);
-}
-
-
-/* ==============================
-   CLICK MAGIC
-============================== */
-
-.luna-magic {
-    position: fixed;
-
-    pointer-events: none;
-
-    z-index: 9999999;
-
-    font-size: 20px;
-
-    animation:
-        magicBurst 1.5s ease-out forwards;
-}
-
-@keyframes magicBurst {
-
-    0% {
-        opacity: 1;
-
-        transform:
-            translate(0,0)
-            scale(.3);
-    }
-
-    100% {
-        opacity: 0;
-
-        transform:
-            translate(
-                var(--x),
-                var(--y)
-            )
-            rotate(var(--rotate))
-            scale(1.4);
-    }
-}
-
-
-/* ==============================
-   MOBILE
-============================== */
+/* MOBILE */
 
 @media (max-width: 600px) {
 
     #luna-zone {
         width: 230px;
-        height: 200px;
+        height: 210px;
 
-        left: 0;
+        right: 0;
         bottom: 0;
     }
 
@@ -517,442 +207,34 @@ html, body {
         width: 215px;
     }
 
-    #play-orb {
-        left: 165px;
-        bottom: 45px;
-
-        width: 14px;
-        height: 14px;
-    }
-
-    #luna-bubble {
-        width: 165px;
-
-        left: 90px;
-        bottom: 150px;
-
-        padding: 10px;
-
-        font-size: 12px;
-    }
 }
 
 </style>
 
-</head>
-
-<body>
-
-
-<!-- MAGIC -->
-
-<div id="freebie-magic"></div>
-
-
-<!-- LUNA -->
 
 <div id="luna-zone">
-
-    <div id="luna-bubble">
-
-        <span id="luna-text">
-            Psst... I found freebies! 🎁✨
-        </span>
-
-    </div>
-
-
-    <div id="play-orb"></div>
-
 
     <img
         id="luna"
         src="./Luna.PNG"
-        alt="Luna - Moonlight Designs"
+        alt="Luna"
     >
 
 </div>
 
 
-
 <script>
 
-(function () {
+const luna = document.getElementById("luna");
 
+luna.addEventListener("click", function () {
 
-const luna =
-    document.getElementById("luna");
+    luna.classList.remove("pounce");
 
-const bubble =
-    document.getElementById("luna-bubble");
+    void luna.offsetWidth;
 
-const lunaText =
-    document.getElementById("luna-text");
+    luna.classList.add("pounce");
 
-const magicLayer =
-    document.getElementById("freebie-magic");
-
-
-let bubbleTimer;
-
-
-/* ==============================
-   LUNA'S SAYINGS
-============================== */
-
-const messages = [
-
-    "Psst... I found freebies! 🎁✨",
-
-    "Free stuff this way! 🐾",
-
-    "I caught another freebie! 😹",
-
-    "Did somebody say FREE?! 👀💜",
-
-    "You can have the downloads. The yarn is mine. 🧶",
-
-    "I found something shiny! ✨",
-
-    "No wallet needed over here! 😂",
-
-    "Go ahead... grab a freebie! 🎁",
-
-    "I'm Luna, official freebie hunter! 🐈‍⬛",
-
-    "Don't tell Stella I found this first. 👀",
-
-    "More freebies please! 💜",
-
-    "Welcome to Luna's treasure pile! ✨"
-
-];
-
-
-let messageIndex = 0;
-
-
-/* ==============================
-   LUNA TALKS
-============================== */
-
-function lunaTalk() {
-
-    lunaText.textContent =
-        messages[messageIndex];
-
-
-    messageIndex =
-        (messageIndex + 1)
-        %
-        messages.length;
-
-
-    bubble.classList.add("show");
-
-
-    clearTimeout(bubbleTimer);
-
-
-    bubbleTimer =
-        setTimeout(
-            function () {
-
-                bubble.classList.remove(
-                    "show"
-                );
-
-            },
-
-            4000
-        );
-}
-
-
-/* ==============================
-   TWINKLES
-============================== */
-
-function createTwinkle() {
-
-    const star =
-        document.createElement("span");
-
-
-    star.className =
-        "twinkle";
-
-
-    star.style.left =
-        Math.random() * 100 + "vw";
-
-
-    star.style.top =
-        Math.random() * 100 + "vh";
-
-
-    star.style.setProperty(
-        "--size",
-        (
-            2 +
-            Math.random() * 4
-        ) + "px"
-    );
-
-
-    magicLayer.appendChild(star);
-
-
-    setTimeout(
-        function () {
-
-            star.remove();
-
-        },
-
-        2300
-    );
-}
-
-
-/* ==============================
-   PAW PRINTS
-============================== */
-
-function createPaw() {
-
-    const paw =
-        document.createElement("span");
-
-
-    paw.className =
-        "paw";
-
-
-    paw.textContent =
-        "🐾";
-
-
-    paw.style.left =
-        Math.random() * 100 + "vw";
-
-
-    paw.style.setProperty(
-        "--size",
-        (
-            12 +
-            Math.random() * 14
-        ) + "px"
-    );
-
-
-    const speed =
-        8 +
-        Math.random() * 6;
-
-
-    paw.style.setProperty(
-        "--speed",
-        speed + "s"
-    );
-
-
-    magicLayer.appendChild(paw);
-
-
-    setTimeout(
-        function () {
-
-            paw.remove();
-
-        },
-
-        speed * 1000
-    );
-}
-
-
-/* ==============================
-   LUNA MAGIC BURST
-============================== */
-
-function lunaBurst() {
-
-    const rect =
-        luna.getBoundingClientRect();
-
-
-    const symbols = [
-        "✨",
-        "💜",
-        "🐾",
-        "⭐",
-        "🎁",
-        "🧶"
-    ];
-
-
-    for (
-        let i = 0;
-        i < 20;
-        i++
-    ) {
-
-        const piece =
-            document.createElement("span");
-
-
-        piece.className =
-            "luna-magic";
-
-
-        piece.textContent =
-            symbols[
-                Math.floor(
-                    Math.random() *
-                    symbols.length
-                )
-            ];
-
-
-        piece.style.left =
-            (
-                rect.left +
-                rect.width / 2
-            ) + "px";
-
-
-        piece.style.top =
-            (
-                rect.top +
-                rect.height / 2
-            ) + "px";
-
-
-        piece.style.setProperty(
-            "--x",
-            (
-                Math.random() * 280 -
-                140
-            ) + "px"
-        );
-
-
-        piece.style.setProperty(
-            "--y",
-            (
-                Math.random() * 250 -
-                170
-            ) + "px"
-        );
-
-
-        piece.style.setProperty(
-            "--rotate",
-            (
-                Math.random() * 720 -
-                360
-            ) + "deg"
-        );
-
-
-        document.body.appendChild(piece);
-
-
-        setTimeout(
-            function () {
-
-                piece.remove();
-
-            },
-
-            1700
-        );
-    }
-}
-
-
-/* ==============================
-   CLICK LUNA
-============================== */
-
-luna.addEventListener(
-    "click",
-    function () {
-
-        luna.classList.remove("pounce");
-
-        void luna.offsetWidth;
-
-        luna.classList.add("pounce");
-
-
-        lunaTalk();
-
-        lunaBurst();
-
-    }
-);
-
-
-/* ==============================
-   LUNA ARRIVES
-============================== */
-
-window.addEventListener(
-    "load",
-    function () {
-
-        setTimeout(
-            function () {
-
-                lunaTalk();
-
-                lunaBurst();
-
-            },
-
-            3200
-        );
-
-    }
-);
-
-
-/* ==============================
-   CONTINUOUS MAGIC
-============================== */
-
-setInterval(
-    createTwinkle,
-    450
-);
-
-
-setInterval(
-    createPaw,
-    2200
-);
-
-
-/* START WITH SPARKLES */
-
-for (
-    let i = 0;
-    i < 15;
-    i++
-) {
-
-    setTimeout(
-        createTwinkle,
-        i * 100
-    );
-}
-
-
-})();
+});
 
 </script>
-
-</body>
-</html>
